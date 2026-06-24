@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="易开兴的开源项目作品集 — 嵌入式开发、物联网、调试工具等领域的技术实践。">
+    <title>项目作品 · 易开兴</title>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --primary-light: #334155;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: #eff6ff;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.04);
+            --radius: 10px;
+            --radius-lg: 14px;
+            --max-width: 1100px;
+            --nav-height: 64px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-height);
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-inner {
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 8px 16px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover { color: var(--primary); background: var(--border-light); }
+
+        .nav-links a.active {
+            color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            color: var(--primary);
+        }
+
+        .nav-toggle svg { width: 24px; height: 24px; }
+
+        /* Page Header */
+        .page-header {
+            padding: calc(var(--nav-height) + 56px) 24px 40px;
+            text-align: center;
+            background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.8px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px 16px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1.5px solid var(--border);
+            background: var(--card);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        /* Projects Grid */
+        .projects-section {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px 64px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+            transform: translateY(-3px);
+        }
+
+        .project-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .project-card h3 {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.3px;
+        }
+
+        .project-status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            background: #ecfdf5;
+            color: #059669;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+
+        .project-status.archived {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .project-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: 18px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 18px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--accent);
+            background: var(--accent-light);
+            border-radius: 5px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .project-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: gap 0.2s ease;
+        }
+
+        .project-links a:hover { gap: 8px; }
+
+        /* Empty State */
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 64px 24px;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state.visible { display: block; }
+
+        .empty-state-icon { font-size: 48px; margin-bottom: 16px; }
+
+        .empty-state h3 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .empty-state p { color: var(--text-muted); font-size: 14px; }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-text { font-size: 14px; color: var(--text-muted); }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: var(--nav-height);
+                left: 0; right: 0;
+                background: rgba(255,255,255,0.98);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 8px;
+                box-shadow: var(--shadow-lg);
+            }
+            .nav-links.open { display: flex; }
+            .nav-toggle { display: block; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 30px; }
+            .project-card { padding: 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .project-card-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .project-status { margin-left: 0; }
+            .footer-inner { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">易开兴<span>.</span></a>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="projects.html" class="active">项目</a></li>
+                <li><a href="skills.html">技能</a></li>
+                <li><a href="contact.html">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>项目作品</h1>
+        <p>我参与和创建的开源项目与技术实践，涵盖嵌入式开发、物联网、工具链等领域。</p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="embedded">嵌入式</button>
+        <button class="filter-btn" data-filter="iot">物联网</button>
+        <button class="filter-btn" data-filter="tools">工具软件</button>
+        <button class="filter-btn" data-filter="other">其他</button>
+    </div>
+
+    <!-- Projects Grid -->
+    <section class="projects-section">
+        <div class="projects-grid" id="projectsGrid">
+
+            <!-- Project 1 -->
+            <article class="project-card" data-category="embedded">
+                <div class="project-card-header">
+                    <h3>MCU 外设驱动库</h3>
+                    <span class="project-status">活跃开发</span>
+                </div>
+                <p>一套轻量级、跨平台的 MCU 外设驱动库，统一封装 STM32 HAL/LL 与 GD32 标准库。提供 GPIO、UART、SPI、I2C、ADC 等常用外设的一致化 API，降低芯片切换成本。</p>
+                <div class="project-tags">
+                    <span class="tag">C</span><span class="tag">STM32</span><span class="tag">GD32</span><span class="tag">HAL</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 GitHub</a>
+                </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="project-card" data-category="iot">
+                <div class="project-card-header">
+                    <h3>多传感器采集网关</h3>
+                    <span class="project-status">活跃开发</span>
+                </div>
+                <p>基于 ESP32-S3 的工业级多传感器数据采集网关。支持温湿度、气压、IMU、GPS 等传感器并发采集，内置数据滤波与 MQTT/HTTP 双协议上报，配套 Web 管理后台。</p>
+                <div class="project-tags">
+                    <span class="tag">C++</span><span class="tag">ESP32</span><span class="tag">MQTT</span><span class="tag">FreeRTOS</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 GitHub</a>
+                </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="project-card" data-category="tools">
+                <div class="project-card-header">
+                    <h3>SerialScope 串口调试器</h3>
+                    <span class="project-status">活跃开发</span>
+                </div>
+                <p>跨平台串口调试与协议分析工具。支持多端口同时监控、自定义协议解析插件、实时波形绘制与数据导出，面向嵌入式开发者的日常调试场景。</p>
+                <div class="project-tags">
+                    <span class="tag">Python</span><span class="tag">PyQt6</span><span class="tag">pyserial</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 GitHub</a>
+                </div>
+            </article>
+
+            <!-- Project 4 -->
+            <article class="project-card" data-category="embedded">
+                <div class="project-card-header">
+                    <h3>FreeRTOS 应用模版</h3>
+                    <span class="project-status">活跃开发</span>
+                </div>
+                <p>面向 STM32/GD32 的 FreeRTOS 工程模版，包含任务管理、消息队列、软件定时器、低功耗管理等最佳实践示例，适合快速启动新项目。</p>
+                <div class="project-tags">
+                    <span class="tag">C</span><span class="tag">FreeRTOS</span><span class="tag">STM32</span><span class="tag">CMSIS</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 GitHub</a>
+                </div>
+            </article>
+
+            <!-- Project 5 -->
+            <article class="project-card" data-category="iot">
+                <div class="project-card-header">
+                    <h3>LoRa 低功耗传感器节点</h3>
+                    <span class="project-status archived">已完成</span>
+                </div>
+                <p>基于 STM32L0 + SX1278 的 LoRa 远距离低功耗传感器节点。支持多种休眠模式，一节电池可持续工作数月，适用于农业与环境监测场景。</p>
+                <div class="project-tags">
+                    <span class="tag">C</span><span class="tag">STM32L0</span><span class="tag">LoRa</span><span class="tag">低功耗</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 GitHub</a>
+                </div>
+            </article>
+
+            <!-- Project 6 -->
+            <article class="project-card" data-category="tools">
+                <div class="project-card-header">
+                    <h3>嵌入式构建工具链</h3>
+                    <span class="project-status archived">已完成</span>
+                </div>
+                <p>基于 CMake + GNU Arm Embedded Toolchain 的统一构建系统，集成静态分析、单元测试与固件打包，支持多目标平台一键构建。</p>
+                <div class="project-tags">
+                    <span class="tag">CMake</span><span class="tag">Python</span><span class="tag">GCC</span><span class="tag">CI/CD</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 GitHub</a>
+                </div>
+            </article>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-state-icon">📭</div>
+                <h3>该分类暂无项目</h3>
+                <p>请选择其他分类查看，或关注后续更新。</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p class="footer-text">&copy; 2026 易开兴. Built with ❤️</p>
+            <ul class="footer-links">
+                <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="contact.html">联系</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script>
+        (function() {
+            /* Mobile nav toggle */
+            const toggle = document.getElementById('navToggle');
+            const links = document.getElementById('navLinks');
+            if (toggle && links) {
+                toggle.addEventListener('click', function() {
+                    links.classList.toggle('open');
+                });
+                document.addEventListener('click', function(e) {
+                    if (!toggle.contains(e.target) && !links.contains(e.target)) {
+                        links.classList.remove('open');
+                    }
+                });
+            }
+
+            /* Project filtering */
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.project-card[data-category]');
+            const emptyState = document.getElementById('emptyState');
+
+            filterBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    /* Update active button */
+                    filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+
+                    var filter = btn.getAttribute('data-filter');
+                    var visibleCount = 0;
+
+                    cards.forEach(function(card) {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = '';
+                            visibleCount++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+
+                    /* Toggle empty state */
+                    if (visibleCount === 0) {
+                        emptyState.classList.add('visible');
+                    } else {
+                        emptyState.classList.remove('visible');
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
