@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="易开兴的技能专长 — 嵌入式开发、编程语言、工具链与教育背景。">
+    <title>技能专长 · 易开兴</title>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --primary-light: #334155;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: #eff6ff;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.04);
+            --radius: 10px;
+            --radius-lg: 14px;
+            --max-width: 1100px;
+            --nav-height: 64px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-height);
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-inner {
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 8px 16px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover { color: var(--primary); background: var(--border-light); }
+
+        .nav-links a.active {
+            color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            color: var(--primary);
+        }
+
+        .nav-toggle svg { width: 24px; height: 24px; }
+
+        /* Page Header */
+        .page-header {
+            padding: calc(var(--nav-height) + 56px) 24px 40px;
+            text-align: center;
+            background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.8px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* Section */
+        .section {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px 64px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-light);
+            letter-spacing: -0.3px;
+        }
+
+        /* Skill Groups */
+        .skill-groups {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-bottom: 56px;
+        }
+
+        .skill-group-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .skill-group-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .skill-group-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-group-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--accent-light);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .skill-item {
+            margin-bottom: 16px;
+        }
+
+        .skill-item:last-child { margin-bottom: 0; }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .skill-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .skill-level {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            height: 6px;
+            background: var(--border-light);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 3px;
+            transition: width 0.6s ease;
+        }
+
+        /* Tech Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 56px;
+        }
+
+        .tech-tag {
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .tech-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 4px;
+            bottom: 4px;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+        }
+
+        .timeline-item:last-child { margin-bottom: 0; }
+
+        .timeline-dot {
+            position: absolute;
+            left: -26px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        .timeline-period {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .timeline-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .timeline-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-text { font-size: 14px; color: var(--text-muted); }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: var(--nav-height);
+                left: 0; right: 0;
+                background: rgba(255,255,255,0.98);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 8px;
+                box-shadow: var(--shadow-lg);
+            }
+            .nav-links.open { display: flex; }
+            .nav-toggle { display: block; }
+            .skill-groups { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 30px; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-inner { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">易开兴<span>.</span></a>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="projects.html">项目</a></li>
+                <li><a href="skills.html" class="active">技能</a></li>
+                <li><a href="contact.html">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>技能专长</h1>
+        <p>持续学习与实践中积累的技术能力，涵盖嵌入式系统、软件开发与工程工具。</p>
+    </div>
+
+    <!-- Core Skills -->
+    <div class="section">
+        <h2 class="section-title">核心技术能力</h2>
+        <div class="skill-groups">
+
+            <!-- Embedded -->
+            <div class="skill-group-card">
+                <h3>
+                    <span class="skill-group-icon">⚡</span>
+                    嵌入式系统
+                </h3>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">C / 嵌入式 C</span><span class="skill-level">熟练</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 88%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">MCU 外设驱动 (STM32/GD32)</span><span class="skill-level">熟练</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 82%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">FreeRTOS / RT-Thread</span><span class="skill-level">掌握</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 72%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">通信协议 (SPI/I2C/UART/CAN)</span><span class="skill-level">熟练</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">低功耗设计</span><span class="skill-level">掌握</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 65%;"></div></div>
+                </div>
+            </div>
+
+            <!-- Software -->
+            <div class="skill-group-card">
+                <h3>
+                    <span class="skill-group-icon">💻</span>
+                    软件开发
+                </h3>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">C++</span><span class="skill-level">掌握</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 72%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">Python</span><span class="skill-level">熟练</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">数据结构与算法</span><span class="skill-level">掌握</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 70%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">Git 版本控制</span><span class="skill-level">熟练</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 82%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">Shell 脚本</span><span class="skill-level">掌握</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 68%;"></div></div>
+                </div>
+            </div>
+
+            <!-- Engineering Tools -->
+            <div class="skill-group-card">
+                <h3>
+                    <span class="skill-group-icon">🛠️</span>
+                    工程工具
+                </h3>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">Keil / IAR / STM32CubeIDE</span><span class="skill-level">熟练</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">逻辑分析仪 / 示波器</span><span class="skill-level">熟练</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 78%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">CMake / Makefile</span><span class="skill-level">掌握</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 70%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">VS Code / Vim</span><span class="skill-level">熟练</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 84%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">Docker 基础</span><span class="skill-level">了解</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 45%;"></div></div>
+                </div>
+            </div>
+
+            <!-- Knowledge -->
+            <div class="skill-group-card">
+                <h3>
+                    <span class="skill-group-icon">📚</span>
+                    专业理论
+                </h3>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">信号与系统</span><span class="skill-level">掌握</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">传感器技术</span><span class="skill-level">熟练</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">自动控制原理</span><span class="skill-level">掌握</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 70%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">数字图像处理</span><span class="skill-level">了解</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 55%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span class="skill-name">机器与深度学习</span><span class="skill-level">了解</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 50%;"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Tags Cloud -->
+        <h2 class="section-title">技术标签</h2>
+        <div class="tech-tags">
+            <span class="tech-tag">C</span><span class="tech-tag">C++</span><span class="tech-tag">Python</span>
+            <span class="tech-tag">STM32</span><span class="tech-tag">GD32</span><span class="tech-tag">ESP32</span>
+            <span class="tech-tag">FreeRTOS</span><span class="tech-tag">RT-Thread</span>
+            <span class="tech-tag">ARM Cortex-M</span><span class="tech-tag">RISC-V</span>
+            <span class="tech-tag">SPI</span><span class="tech-tag">I2C</span><span class="tech-tag">UART</span>
+            <span class="tech-tag">CAN</span><span class="tech-tag">MQTT</span><span class="tech-tag">LoRa</span>
+            <span class="tech-tag">BLE</span><span class="tech-tag">WiFi</span>
+            <span class="tech-tag">Keil</span><span class="tech-tag">IAR</span><span class="tech-tag">STM32CubeIDE</span>
+            <span class="tech-tag">CMake</span><span class="tech-tag">Git</span>
+            <span class="tech-tag">Docker</span><span class="tech-tag">Linux</span>
+            <span class="tech-tag">PyQt</span><span class="tech-tag">OpenCV</span>
+        </div>
+
+        <!-- Timeline -->
+        <h2 class="section-title">教育经历</h2>
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-period">2027.09 — 2030.06（预期）</div>
+                <div class="timeline-title">硕士研究生 · 电子信息</div>
+                <div class="timeline-subtitle">四川大学</div>
+                <div class="timeline-desc">研究方向聚焦嵌入式系统与智能感知，深入探索信号处理与边缘计算在工业场景中的应用。</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-period">2023.09 — 2027.06</div>
+                <div class="timeline-title">本科 · 智能感知工程</div>
+                <div class="timeline-subtitle">西南石油大学</div>
+                <div class="timeline-desc">主修模拟/数字电子技术、嵌入式系统设计、信号与系统、智能传感器技术、自动控制原理、模式识别与深度学习等课程。在校期间积极参与开源项目与嵌入式竞赛。</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p class="footer-text">&copy; 2026 易开兴. Built with ❤️</p>
+            <ul class="footer-links">
+                <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="contact.html">联系</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script>
+        (function() {
+            var toggle = document.getElementById('navToggle');
+            var links = document.getElementById('navLinks');
+            if (toggle && links) {
+                toggle.addEventListener('click', function() {
+                    links.classList.toggle('open');
+                });
+                document.addEventListener('click', function(e) {
+                    if (!toggle.contains(e.target) && !links.contains(e.target)) {
+                        links.classList.remove('open');
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
